@@ -383,6 +383,7 @@ export interface ApiLocationLocation extends Schema.CollectionType {
     > &
       Attribute.Private;
     image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    log: Attribute.JSON;
     name: Attribute.String;
     publishedAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
