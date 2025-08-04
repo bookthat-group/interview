@@ -7,18 +7,13 @@ const { create } = useStrapi();
 type Location = {
   id: number;
   name: string;
-  address: {
-    street: string;
-    houseNumber: string;
-    houseNumberAddition: string;
-    zipCode: string;
-    city: string;
-    country: string;
-  };
-  image?: string;
+  street: string;
+  houseNumber: string;
+  houseNumberAddition: string;
+  zipCode: string;
+  city: string;
+  country: string;
 };
-
-const locations = ref<Location[]>([]);
 
 const form = ref({
   name: "",
@@ -43,32 +38,14 @@ const addLocation = async () => {
     return;
 
   try {
-    const created = await create(
-      "locations",
-      {
-        name: form.value.name,
-        address: {
-          street: form.value.street,
-          houseNumber: form.value.houseNumber,
-          houseNumberAddition: form.value.houseNumberAddition,
-          zipCode: form.value.zipCode,
-          city: form.value.city,
-          country: form.value.country,
-        },
-      },
-      {
-        populate: ["address", "image"],
-      }
-    );
-
-    const loc = created.data;
-    console.log("Created location:", loc);
-
-    locations.value.push({
-      id: loc.id,
-      name: loc.attributes.name,
-      address: loc.attributes.address,
-      image: loc?.attributes?.image,
+    await create("locations", {
+      name: form.value.name,
+      street: form.value.street,
+      houseNumber: form.value.houseNumber,
+      houseNumberAddition: form.value.houseNumberAddition,
+      zipCode: form.value.zipCode,
+      city: form.value.city,
+      country: form.value.country,
     });
 
     form.value.name = "";
@@ -187,29 +164,7 @@ const addLocation = async () => {
 
       <!-- List of locations -->
       <ul class="mt-6 space-y-3">
-        <li
-          v-for="loc in locations"
-          :key="loc.id"
-          class="bg-gray-100 rounded-lg p-4 shadow-sm"
-        >
-          <h3 class="font-semibold text-lg">{{ loc.name }}</h3>
-          <p class="text-sm text-gray-600">
-            {{ loc.address.street }}
-            {{ loc.address.houseNumber }}
-            {{
-              loc.address.houseNumberAddition
-                ? loc.address.houseNumberAddition
-                : ""
-            }}, {{ loc.address.zipCode }} {{ loc.address.city }},
-            {{ loc.address.country }}
-          </p>
-          <img
-            v-if="loc.image"
-            :src="loc.image"
-            alt="Location Image"
-            class="mt-2 rounded w-full object-cover max-h-48"
-          />
-        </li>
+        <!-- TODO: create a (sortable on created) list of locations -->
       </ul>
     </div>
   </div>

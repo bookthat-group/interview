@@ -15,22 +15,36 @@
     "name": {
       "type": "string"
     },
-    "image": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "address": {
-      "type": "component",
-      "repeatable": false,
-      "component": "address.address",
-      "required": true
+      "type": "string"
+    },
+    "zipCode": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "country": {
+      "type": "enumeration",
+      "enum": ["NL", "BE", "DE", "PL"]
+    },
+    "latitude": {
+      "type": "float"
+    },
+    "longitude": {
+      "type": "float"
+    },
+    "street": {
+      "type": "string"
+    },
+    "houseNumber": {
+      "type": "string"
+    },
+    "houseNumberAddition": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
     },
     "log": {
       "type": "json"

@@ -374,7 +374,9 @@ export interface ApiLocationLocation extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    address: Attribute.Component<'address.address'> & Attribute.Required;
+    address: Attribute.String;
+    city: Attribute.String;
+    country: Attribute.Enumeration<['NL', 'BE', 'DE', 'PL']>;
     createdAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::location.location',
@@ -382,10 +384,15 @@ export interface ApiLocationLocation extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    houseNumber: Attribute.String;
+    houseNumberAddition: Attribute.String;
+    latitude: Attribute.Float;
     log: Attribute.JSON;
+    longitude: Attribute.Float;
     name: Attribute.String;
     publishedAt: Attribute.DateTime;
+    region: Attribute.String;
+    street: Attribute.String;
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::location.location',
@@ -393,6 +400,7 @@ export interface ApiLocationLocation extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    zipCode: Attribute.String;
   };
 }
 
